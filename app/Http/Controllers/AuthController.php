@@ -25,9 +25,11 @@ class AuthController extends Controller
                 return redirect()->intended('/dashboard');
             } else if (auth()->user()->role_id === 2) {
                 return redirect()->intended('/dashboard');
+            } else if (auth()->user()->role_id === 3) {
+                return redirect()->intended('/dashboard');
             } else {
                 return redirect()->intended('/dashboard');
-            }
+            } 
         }
         return back()->with('error', 'email atau password salah');
     }

@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class PjController extends Controller
 {
     public function index() {//tambah
-        return view('pj.index');//tambah
+        return view('dashboard');//tambah
     }//tambah
 }

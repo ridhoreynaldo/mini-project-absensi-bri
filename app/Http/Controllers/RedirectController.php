@@ -11,6 +11,8 @@ class RedirectController extends Controller
             return redirect('/dashboard');
         } else if (auth ()-> user() -> role_id === 2){
             return redirect('/dashboard');
+        } else if (auth ()-> user() -> role_id === 3){
+            return redirect('/dashboard');
         } else {
             return redirect('/dashboard');
         }

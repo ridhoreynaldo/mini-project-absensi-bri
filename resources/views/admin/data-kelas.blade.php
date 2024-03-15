@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Data Asisten</h1>
+                    <h1>Data Kelas</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Data Asisten</li>
+                        <li class="breadcrumb-item active">Data Kelas</li>
                     </ol>
                 </div>
             </div>
@@ -34,20 +34,16 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
+                                    <th>Nama Kelas</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
+                            @foreach($kelass as $user)
 
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role->role_name }}</td>
+                                    <td>{{ $user->nama_kelas }}</td>
 
                                     
                                     <td class="text-center py-0 align-middle">
@@ -59,7 +55,7 @@
                                         </div>
                                         
                                         <div class="btn-group btn-group-sm">
-                                            <form action="{{route('data-asisten.destroy', ['id' => $user->id])}}" method="post" onsubmit="return confirm('delete this data?');">
+                                            <form action="{{route('data-kelas.destroy', ['id' => $user->id])}}" method="post" onsubmit="return confirm('delete this data?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm" type="submit" name="delete"><i class="fas fa-trash"></i></button>
@@ -78,41 +74,17 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <form action="{{route('data-asisten.update', ['id' => $user->id])}}" method="POST" enctype="multipart/form-data">
+                                                        <form action="{{route('data-kelas.update', ['id' => $user->id])}}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="form-group">
-                                                                <label for="name">Name</label>
-                                                                <input type="text" name="name" value="{{$user->name}}" id="name" autocomplete="name" class="form-control">
-                                                                @error('name')
+                                                                <label for="nama_kelas">Nama Kelas</label>
+                                                                <input type="text" name="nama_kelas" value="{{$user->nama_kelas}}" id="nama_kelas" autocomplete="nama_kelas" class="form-control">
+                                                                @error('nama_kelas')
                                                                 <span class="text-red-500">{{ $message }}</span>
                                                                 @enderror
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="email">Email</label>
-                                                                <input type="email" name="email" value="{{$user->email}}" id="email" autocomplete="email" class="form-control">
-                                                                @error('email')
-                                                                <span class="text-red-500">{{ $message }}</span>
-                                                                @enderror
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="password">Password</label>
-                                                                <input type="password" name="password" value="{{$user->password}}" id="password" autocomplete="password" class="form-control">
-                                                                @error('password')
-                                                                <span class="text-red-500">{{ $message }}</span>
-                                                                @enderror
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="role_id">Role</label>
-                                                                  <select id="role_id" name="role_id" autocomplete="role_id" class="form-control">
-                                                                    @foreach($roles as $role)
-                                                                    <option value="{{$role->id}}" {{$role->role_name == $user->role->role_name ? 'selected' : ''}}>{{$role->role_name}}</option>
-                                                                    @endforeach
-                                                                  </select>
-                                                            </div>
-                                                            @error('role_id')
-                                                            <span class="text-red-500">{{ $message }}</span>
-                                                            @enderror
+                                                            
                                                             <div class="form-group">
                                                                 <input type="submit" value="Update" class="btn btn-success">
                                                             </div>
@@ -147,39 +119,13 @@
             </div>
             <div class="modal-body">
 
-                <form action="{{route('data-asisten.store')}}" method="POST">
+                <form action="{{route('data-kelas.store')}}" method="POST">
                 @csrf
                     <div class="form-group">
-                        <label>Nama</label>
-                        <input type="text" name="name" class="form-control" value="{{old('name')}}">
-                        @error('name')
+                        <label>Nama Kelas</label>
+                        <input type="text" name="nama_kelas" class="form-control" value="{{old('nama_kelas')}}">
+                        @error('nama_kelas')
                             <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" class="form-control" value="{{old('email')}}">
-                        @error('email')
-                            <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" name="password" class="form-control" value="{{old('password')}}">
-                        @error('password')
-                            <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    
-                    <div class="form-group">
-                        <select id="role_id" name="role_id" class="form-control">
-                            @foreach($roles as $role)
-                                <option value="{{$role->id}}" {{$role->id == old('role_id') ? 'selected' : ''}}>{{$role->role_name}}</option>
-                            @endforeach
-                        </select>
-                        @error('role_id')
-                        <span class="text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 

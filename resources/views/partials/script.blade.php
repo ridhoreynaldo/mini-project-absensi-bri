@@ -61,3 +61,12 @@ $(function() {
     });
 });
 </script>
+<script>
+    function updateDateTime() {
+        const now = new Date();
+        const dateTimeString = now.toLocaleString();
+        document.getElementById('liveDateTime').innerHTML = dateTimeString;
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+</script>

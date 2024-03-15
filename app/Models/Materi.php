@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Code extends Model
+class Materi extends Model
 {
     use HasFactory;
-    protected $table ='tb_codee';
-    protected $fillable = ['code','id_user'];
+
+    protected $table = 'tb_materi';
+
+    protected $fillable = [
+        'nama_materi',
+    ];
     protected $hidden = [
         'id',
     ];
-
 }
